@@ -1,0 +1,9 @@
+version: "3"
+
+tasks:
+  check:
+    desc: Check code before pushing to branch
+    cmds:
+      - go mod tidy
+      - gofmt -w .
+      - go test ./...

@@ -1,0 +1,2 @@
+### Send Get request to check health of the server
+GET http://0.0.0.0:8080/health

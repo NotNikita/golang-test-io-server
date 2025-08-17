@@ -1,0 +1,5 @@
+service:
+  host: localhost
+  port: 8080
+  file: "/output/task-db.json"
+  interval: 3

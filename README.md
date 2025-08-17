@@ -1,40 +1,40 @@
-# Тестовое задание Golang-Task-API
+# Golang Task API Test Assignment
 
-## Техническое задание
+## Technical Specification
 
-Разработать HTTP-сервис на языке Go, который позволяет создавать, отслеживать и удалять долгие асинхронные задачи (I/O bound), имитирующие продолжительную работу (3–5 минут). Все данные должны храниться в памяти без использования внешних систем.
+Develop an HTTP service in Go that allows creating, tracking, and deleting long-running asynchronous tasks (I/O bound) that simulate prolonged work (3-5 minutes). All data should be stored in memory without using external systems.
 
-## Описание API
+## API Description
 
-`POST /api/tasks` - регистрация задачи в системе
+`POST /api/tasks` - register a task in the system
 
-`GET /api/tasks/{task_id}` - получение информации о задаче по task_id
+`GET /api/tasks/{task_id}` - get information about a task by task_id
 
-`DELETE /api/tasks/{task_id}` - удаление задачи из системы
+`DELETE /api/tasks/{task_id}` - delete a task from the system
 
-## Флаги
+## Configuration
 
-- -a - Адресс сервера host:port - значение по-умолчанию "localhost:8080"
-- -f - Путь до файла сохранения/выгрузки данных	- значение по умолчанию "/tmp/task-db.json"
-- -i - Интервал сохранения данных в файл (указывается целое число секунд) - значение по умолчанию "3 cекунды"    
+- host and port - server address <host:port> - default "localhost:8080"
+- file - Path to the data save/load file - default value "/output/task-db.json"
+- interval - Data save interval to file (specified as whole number of seconds) - default value "3 seconds"
 
-## Требования
+## Requirements
 
-Go - v1.24.4
+Go - v1.24.3
 
-## Запуск
+## Running
 
-### Запуск исходного кода
+### Running from source code
 
-1) Необходимо склонировать репозиторий
-`git clone https://github.com/a2sh3r/golang-task-api.git` и зайти внутрь директории
+1. Clone the repository
+   `git clone https://github.com/a2sh3r/golang-task-api.git` and enter the directory
 
-2) Произвести команду `go mod tidy`
+2. Run the command `go mod tidy`
 
-3) Запустить сервер `go run ./сmd/main.go`
+3. Start the server `go run ./cmd/main.go`
 
-### Запуск при помощи бинарного файла
+### Running using binary file
 
-1) Скачать бинарный файл соответствующий ОС из Releases
+1. Download the binary file corresponding to your OS from Releases
 
-2) Запустить бинарный файл
+2. Run the binary file
