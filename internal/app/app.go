@@ -11,7 +11,11 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 
+	"test-server/internal/app/handlers"
 	config "test-server/internal/config"
+	"test-server/internal/domain/task/repository"
+	"test-server/internal/domain/task/service"
+	middleware "test-server/internal/middleware"
 )
 
 type App struct {
@@ -34,11 +38,17 @@ func NewApp(configPath string) (*App, error) {
 
 func (a *App) BootstrapHandlers() *fiber.App {
 	fiberApp := fiber.New()
-	ApplyMiddleware(fiberApp)
+	middleware.CorsMiddleware(fiberApp)
+	middleware.LoggerMiddleware(fiberApp)
+
+	tasksRepo := repository.NewTasksRepository()
+	tasksService := service.NewTasksService(a.config.Service.Interval, tasksRepo)
+	handler := handlers.NewHandler(tasksService)
 
 	fiberApp.Get("/health", func(c *fiber.Ctx) error {
 		return c.SendString("Healthy")
 	})
+	fiberApp.Post("api/tasks", handler.PostRegisterTask)
 	return fiberApp
 }
 

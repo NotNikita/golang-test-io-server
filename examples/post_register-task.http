@@ -1,0 +1,7 @@
+### Send POST request with json body
+POST http://0.0.0.0:8080/api/tasks
+Content-Type: application/json
+
+{
+  "title": "New Task"
+}
