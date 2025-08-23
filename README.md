@@ -27,9 +27,9 @@ Go - v1.24.3
 ### Running from source code
 
 1. Clone the repository
-   `git clone https://github.com/a2sh3r/golang-task-api.git` and enter the directory
+   `git clone https://github.com/NotNikita/golang-test-io-server.git` and enter the directory
 
-2. Run the command `go mod tidy`
+2. Run the command `task check`
 
 3. Start the server `go run ./cmd/main.go`
 
