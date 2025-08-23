@@ -22,9 +22,9 @@ func (h *Handler) DeleteTask(c *fiber.Ctx) error {
 	if err != nil {
 		if errors.Is(err, model.ErrTaskNotFound) {
 			return c.Status(fiber.StatusPreconditionFailed).JSON(fiber.Map{
-			"ok":    false,
-			"error": fmt.Errorf("task with provided id wasn't found: %w", err).Error(),
-		})
+				"ok":    false,
+				"error": fmt.Errorf("task with provided id wasn't found: %w", err).Error(),
+			})
 		}
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"ok":    false,
@@ -33,7 +33,7 @@ func (h *Handler) DeleteTask(c *fiber.Ctx) error {
 	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"ok":    true,
-			"error": "task was successfully removed",
-		})
+		"ok":    true,
+		"error": "task was successfully removed",
+	})
 }

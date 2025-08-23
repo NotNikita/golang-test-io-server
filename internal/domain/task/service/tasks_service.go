@@ -55,7 +55,7 @@ func (s *TasksService) RegisterTask(ctx context.Context, title string) (string, 
 
 		task.Duration = sleepInterval
 		if err := s.tasksRepo.UpdateTask(context.Background(), task.ID.String(), task.Status); err != nil {
-			log.Printf("TasksService.RegisterTask: error while updating task status: %w", err.Error())
+			log.Printf("TasksService.RegisterTask: error while updating task status: %v", err.Error())
 		}
 	}()
 
@@ -71,7 +71,7 @@ func (s *TasksService) TaskInfo(ctx context.Context, taskId string) (*model.Task
 	return taskInfo, nil
 }
 
-func (s *TasksService) DeleteTask(ctx context.Context, taskId string) (error) {
+func (s *TasksService) DeleteTask(ctx context.Context, taskId string) error {
 	err := s.tasksRepo.DeleteTask(ctx, taskId)
 	if err != nil {
 		return fmt.Errorf("TasksRepo.DeleteTask: failed to delete task info by id: %w", err)

@@ -13,16 +13,16 @@ import (
 
 type taskInfoResponse struct {
 	ID        uuid.UUID `json:"task_id"`
-    Status    string    `json:"status"`
-    Title     string    `json:"title"`
-    CreatedAt time.Time `json:"created_at"`
-    Duration  int64     `json:"duration_ms"` // Convert to milliseconds for API
+	Status    string    `json:"status"`
+	Title     string    `json:"title"`
+	CreatedAt time.Time `json:"created_at"`
+	Duration  int64     `json:"duration_ms"` // Convert to milliseconds for API
 }
 
 type getTaskInfoResponse struct {
 	TaskDetails taskInfoResponse `json:"data"`
-	Error string `json:"error"`
-	OK bool `json:"ok"`
+	Error       string           `json:"error"`
+	OK          bool             `json:"ok"`
 }
 
 func (h *Handler) GetTaskInfo(c *fiber.Ctx) error {
@@ -38,9 +38,9 @@ func (h *Handler) GetTaskInfo(c *fiber.Ctx) error {
 	if err != nil {
 		if errors.Is(err, model.ErrTaskNotFound) {
 			return c.Status(fiber.StatusPreconditionFailed).JSON(fiber.Map{
-			"ok":    false,
-			"error": fmt.Errorf("task with provided id wasn't found: %w", err).Error(),
-		})
+				"ok":    false,
+				"error": fmt.Errorf("task with provided id wasn't found: %w", err).Error(),
+			})
 		}
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"ok":    false,
@@ -49,15 +49,15 @@ func (h *Handler) GetTaskInfo(c *fiber.Ctx) error {
 	}
 	if taskInfo == nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"ok": false,
+			"ok":    false,
 			"error": "service returned nil task without error",
 		})
 	}
 
 	taskDTO := mapTaskToDTO(taskInfo)
 	response := getTaskInfoResponse{
-		OK: true,
-		Error: "",
+		OK:          true,
+		Error:       "",
 		TaskDetails: taskDTO,
 	}
 	return c.Status(fiber.StatusOK).JSON(response)
@@ -76,11 +76,11 @@ func validateTaskId(s string) bool {
 }
 
 func mapTaskToDTO(task *model.Task) taskInfoResponse {
-    return taskInfoResponse{
-        ID:        task.ID,
-        Status:    string(task.Status), // Convert enum to string
-        Title:     task.Title,
-        CreatedAt: task.CreatedAt,
-        Duration:  task.Duration.Milliseconds(), // Convert to milliseconds
-    }
+	return taskInfoResponse{
+		ID:        task.ID,
+		Status:    string(task.Status), // Convert enum to string
+		Title:     task.Title,
+		CreatedAt: task.CreatedAt,
+		Duration:  task.Duration.Milliseconds(), // Convert to milliseconds
+	}
 }
