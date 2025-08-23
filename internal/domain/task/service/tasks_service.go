@@ -11,6 +11,7 @@ import (
 	"github.com/google/uuid"
 )
 
+//go:generate minimock -i TasksRepository -o ./mock -s _mock.go
 type TasksRepository interface {
 	CreateTask(ctx context.Context, task model.Task) error
 	GetTask(ctx context.Context, id string) (*model.Task, error)

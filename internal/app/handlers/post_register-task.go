@@ -17,6 +17,12 @@ func (h *Handler) PostRegisterTask(c *fiber.Ctx) error {
 			"error": "Cannot parse JSON",
 		})
 	}
+	if postRegisterTask.Title == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"ok":    false,
+			"error": "request's body doesnt match schema",
+		})
+	}
 
 	newID, err := h.tasksService.RegisterTask(c.UserContext(), postRegisterTask.Title)
 	if err != nil {

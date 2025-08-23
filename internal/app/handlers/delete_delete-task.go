@@ -33,7 +33,7 @@ func (h *Handler) DeleteTask(c *fiber.Ctx) error {
 	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-		"ok":    true,
-		"error": "task was successfully removed",
+		"ok":   true,
+		"data": "task was successfully removed",
 	})
 }
