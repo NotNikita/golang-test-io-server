@@ -1,0 +1,2 @@
+### Send DELETE request
+DELETE http://0.0.0.0:8080/api/tasks/ca545e27-4e9b-4c95-b38b-d72069e33975

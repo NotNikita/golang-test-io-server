@@ -9,6 +9,7 @@ import (
 type TasksService interface {
 	RegisterTask(ctx context.Context, title string) (string, error)
 	TaskInfo(ctx context.Context, taskId string) (*model.Task, error)
+	DeleteTask(ctx context.Context, taskId string) (error)
 }
 
 type Handler struct {

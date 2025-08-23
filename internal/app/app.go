@@ -50,6 +50,7 @@ func (a *App) BootstrapHandlers() *fiber.App {
 	})
 	fiberApp.Post("api/tasks", handler.PostRegisterTask)
 	fiberApp.Get("api/tasks/:id", handler.GetTaskInfo)
+	fiberApp.Delete("api/tasks/:id", handler.DeleteTask)
 	return fiberApp
 }
 

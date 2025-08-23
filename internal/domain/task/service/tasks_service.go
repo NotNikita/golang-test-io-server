@@ -70,3 +70,12 @@ func (s *TasksService) TaskInfo(ctx context.Context, taskId string) (*model.Task
 
 	return taskInfo, nil
 }
+
+func (s *TasksService) DeleteTask(ctx context.Context, taskId string) (error) {
+	err := s.tasksRepo.DeleteTask(ctx, taskId)
+	if err != nil {
+		return fmt.Errorf("TasksRepo.DeleteTask: failed to delete task info by id: %w", err)
+	}
+
+	return nil
+}

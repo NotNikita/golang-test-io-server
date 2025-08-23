@@ -39,12 +39,12 @@ func (h *Handler) GetTaskInfo(c *fiber.Ctx) error {
 		if errors.Is(err, model.ErrTaskNotFound) {
 			return c.Status(fiber.StatusPreconditionFailed).JSON(fiber.Map{
 			"ok":    false,
-			"error": fmt.Errorf("Task with provided id wasn't found: %w", err).Error(),
+			"error": fmt.Errorf("task with provided id wasn't found: %w", err).Error(),
 		})
 		}
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"ok":    false,
-			"error": fmt.Errorf("Failed to find task with provided id: %w", err).Error(),
+			"error": fmt.Errorf("failed to find task with provided id: %w", err).Error(),
 		})
 	}
 	if taskInfo == nil {
