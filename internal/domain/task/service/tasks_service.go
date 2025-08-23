@@ -20,13 +20,13 @@ type TasksRepository interface {
 
 type TasksService struct {
 	SaveInterval int // seconds
-	tasksRepo TasksRepository
+	tasksRepo    TasksRepository
 }
 
 func NewTasksService(interval int, tasksRepo TasksRepository) *TasksService {
 	return &TasksService{
 		SaveInterval: interval,
-		tasksRepo: tasksRepo,
+		tasksRepo:    tasksRepo,
 	}
 }
 
@@ -43,7 +43,7 @@ func (s *TasksService) RegisterTask(ctx context.Context, title string) (string, 
 		return "", fmt.Errorf("TasksService.RegisterTask: failed to create new task: %w", err)
 	}
 
-	go func(){
+	go func() {
 		sleepInterval := time.Duration(2+s.SaveInterval) * time.Second
 		time.Sleep(sleepInterval)
 
@@ -60,4 +60,13 @@ func (s *TasksService) RegisterTask(ctx context.Context, title string) (string, 
 	}()
 
 	return task.ID.String(), nil
+}
+
+func (s *TasksService) TaskInfo(ctx context.Context, taskId string) (*model.Task, error) {
+	taskInfo, err := s.tasksRepo.GetTask(ctx, taskId)
+	if err != nil {
+		return nil, fmt.Errorf("TasksRepo.GetTask: failed to get task info by id: %w", err)
+	}
+
+	return taskInfo, nil
 }

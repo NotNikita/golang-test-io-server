@@ -48,12 +48,12 @@ func (repo *TasksRepository) GetTask(ctx context.Context, id string) (*model.Tas
 func (repo *TasksRepository) UpdateTask(ctx context.Context, id string, status model.Status) error {
 	repo.mu.Lock()
 	defer repo.mu.Unlock()
-	
+
 	task, exists := repo.storage[id]
 	if !exists {
 		return model.ErrTaskNotFound
 	}
-	
+
 	task.Status = status
 	repo.storage[id] = task
 	return nil

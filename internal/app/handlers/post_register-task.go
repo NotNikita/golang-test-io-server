@@ -27,7 +27,7 @@ func (h *Handler) PostRegisterTask(c *fiber.Ctx) error {
 	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-		"ok": true,
-		"data":  newID,
+		"ok":   true,
+		"data": newID,
 	})
 }

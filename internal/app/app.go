@@ -49,6 +49,7 @@ func (a *App) BootstrapHandlers() *fiber.App {
 		return c.SendString("Healthy")
 	})
 	fiberApp.Post("api/tasks", handler.PostRegisterTask)
+	fiberApp.Get("api/tasks/:id", handler.GetTaskInfo)
 	return fiberApp
 }
 
